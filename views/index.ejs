@@ -1,0 +1,114 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/public/style.css" />
+ 
+   
+    <script>
+        var TxtType = function(el, toRotate, period) {
+        this.toRotate = toRotate;
+        this.el = el;
+        this.loopNum = 0;
+        this.period = parseInt(period, 10) || 2000;
+        this.txt = '';
+        this.tick();
+        this.isDeleting = false;
+    };
+
+    TxtType.prototype.tick = function() {
+        var i = this.loopNum % this.toRotate.length;
+        var fullTxt = this.toRotate[i];
+
+        if (this.isDeleting) {
+        this.txt = fullTxt.substring(0, this.txt.length - 1);
+        } else {
+        this.txt = fullTxt.substring(0, this.txt.length + 1);
+        }
+
+        this.el.innerHTML = '<span class="wrap">'+this.txt+'</span>';
+
+        var that = this;
+        var delta = 200 - Math.random() * 100;
+
+        if (this.isDeleting) { delta /= 2; }
+
+        if (!this.isDeleting && this.txt === fullTxt) {
+        delta = this.period;
+        this.isDeleting = true;
+        } else if (this.isDeleting && this.txt === '') {
+        this.isDeleting = false;
+        this.loopNum++;
+        delta = 500;
+        }
+
+        setTimeout(function() {
+        that.tick();
+        }, delta);
+    };
+
+    window.onload = function() {
+        var elements = document.getElementsByClassName('typewrite');
+        for (var i=0; i<elements.length; i++) {
+            var toRotate = elements[i].getAttribute('data-type');
+            var period = elements[i].getAttribute('data-period');
+            if (toRotate) {
+              new TxtType(elements[i], JSON.parse(toRotate), period);
+            }
+        }
+        // INJECT CSS
+        var css = document.createElement("style");
+        css.type = "text/css";
+        css.innerHTML = ".typewrite > .wrap { border-right: 0.08em solid #fff}";
+        document.body.appendChild(css);
+    };
+    window.addEventListener('load', function() {
+  document.body.classList.add('loaded');
+});
+    </script>
+    <title>Checker</title>
+</head>
+<body>
+    <div class="loader-wrapper">
+        <div class="loader"></div>
+      </div>
+   <div class="maindiv">
+    <h1>
+        Free information 😉
+      </h1>
+      <p class="maina">Take the information of a third secondary student , by Mohammed Alqahtani 😁</p>
+
+   </div>
+<div id="formdiv">
+    
+ 
+    <form method="POST" action="/ID">
+       <a>National 🆔 :</a><br/>
+        <input name="ID" id="forminput" type="number"  oninput="javascript: if (this.value.length > this.maxLength){ this.value = this.value.length = null; alert('max id numbers is 10')}" maxlength="10"/>
+        <div id="button">
+            <button id="buttonsubmit" type="submit" >submit</button>
+        </div>
+    </form>
+</div>
+<div class="datadiv">
+    <div class="data-container   ">
+        <div>
+            <a></a>
+            <a class="BigA">👤 Name :</a><a><%=data.Name%></a>
+            <br/>
+            <a class="BigA">📅 Date of Birth :</a><a><%=data.Date%></a>
+            <br/>
+            <a class="BigA">📑 Qudrat Mark :</a><a><%=data.Qudrat%>%</a>
+            <br/>
+            <a class="BigA">📑 Tahsile Mark :</a><a><%=data.Tahsile%>%</a>
+            <br/>
+            <a class="BigA">📑 High School Mark :</a><a><%=data.Highschool%></a>
+        </div>
+       
+    </div>
+</div>
+
+</body>
+</html>

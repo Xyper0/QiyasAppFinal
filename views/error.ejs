@@ -1,0 +1,65 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/public/style.css" />
+ 
+   
+    <script>
+        function delay(time) {
+    return new Promise(function(resolve) {
+        setTimeout(resolve, time)
+    })
+}
+   
+delay(500).then(() => {
+    alert('This is not true id')
+    window.location.href = "/"; 
+})
+    
+    </script>
+    <title>Checker</title>
+</head>
+<body>
+
+    <div class="maindiv">
+        <h1>
+            Free information 😉
+          </h1>
+          <p class="maina">Take the information of a third secondary student , by Mohammed Alqahtani 😁</p>
+    
+       </div>
+<div id="formdiv">
+    
+ 
+    <form method="POST" action="/ID">
+       <a>National 🆔 :</a><br/>
+        <input name="ID" id="forminput" type="number"  oninput="javascript: if (this.value.length > this.maxLength){ this.value = this.value.length = null; alert('max id numbers is 10')}" maxlength="10"/>
+        <div id="button">
+            <button id="buttonsubmit" type="submit" >submit</button>
+        </div>
+    </form>
+</div>
+
+<div class="datadiv">
+    <div class="data-container">
+        <div>
+            <a></a>
+            <a class="BigA">👤 Name :</a><a><%=data.Name%></a>
+            <br/>
+            <a class="BigA">📅 Date of Birth :</a><a><%=data.Date%></a>
+            <br/>
+            <a class="BigA">📑 Qudrat Mark :</a><a><%=data.Qudrat%>%</a>
+            <br/>
+            <a class="BigA">📑 Tahsile Mark :</a><a><%=data.Tahsile%>%</a>
+            <br/>
+            <a class="BigA">📑 High School Mark :</a><a><%=data.Highschool%>%</a>
+        </div>
+       
+    </div>
+</div>
+
+</body>
+</html>
